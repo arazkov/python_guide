@@ -1,0 +1,127 @@
+<Content>
+    padding: 5,40,5,5
+#    adaptive_height: True
+    height: '200dp'
+
+#    BoxLayout:
+    RstDocument:
+#        text: ".. _top:\n\nHello world\n===========\n\nThis is an **emphased text**, some ``interpreted text``.\nAnd this is a reference to top_::\n\n    $ print('Hello world')\n"
+        text: root.qq
+        background_color:  0, 0, 0, 0
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/logo/kivy-icon-256.png"
+
+    MDLabel:
+        text: app.title
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: app.by_who
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    ScrollView:
+        DrawerList:
+            id: md_list
+
+<Container>:
+    qq: qq
+    Screen:
+        MDNavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation: 'vertical'
+
+                        MDToolbar:
+                            id: qq
+                            title: app.title
+                            elevation: 10
+                            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                            right_action_items: [['star-outline', lambda x: app.on_star_click()]]
+
+                        MDTabs:
+                            id: tabs
+                            on_tab_switch: app.on_tab_switch(*args)
+
+                            Tab:
+                                #id : tab1
+                                text: "string"
+                                ScrollView:
+                                    MDGridLayout:
+                                        id: string
+                                        cols: 1
+                                        adaptive_height: True
+                                        padding: "25dp"
+
+                            Tab:
+                                #id: tab2
+                                text: "list"
+                                ScrollView:
+                                    MDGridLayout:
+                                        id: list
+                                        cols: 1
+                                        adaptive_height: True
+                                        padding: "25dp"
+
+                            Tab:
+                                #id: tab3
+                                text: "dict"
+                                ScrollView:
+                                    MDGridLayout:
+                                        id: dict
+                                        cols: 1
+                                        adaptive_height: True
+                                        padding: "25dp"
+
+                            Tab:
+                                #id: tab4
+                                text: "set"
+                                ScrollView:
+                                    MDGridLayout:
+                                        id: set
+                                        cols: 1
+                                        adaptive_height: True
+                                        padding: "25dp"
+
+                            Tab:
+                                #id: tab5
+                                text: "files"
+                                ScrollView:
+                                    MDGridLayout:
+                                        id: files
+                                        cols: 1
+                                        adaptive_height: True
+                                        padding: "25dp"
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+                    id: content_drawer
